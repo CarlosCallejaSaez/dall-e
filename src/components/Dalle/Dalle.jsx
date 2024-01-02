@@ -3,6 +3,7 @@ import "./Dalle.css";
 
 const Dalle = () => {
   const API_TOKEN = import.meta.env.VITE_OPENAI_API_KEY;
+  const API_URL= import.meta.env.VITE_API_URL
 
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState(null);
@@ -18,7 +19,7 @@ const Dalle = () => {
 
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4",
+        API_URL,
         {
           method: "POST",
           headers: {
