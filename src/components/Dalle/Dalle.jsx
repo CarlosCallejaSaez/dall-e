@@ -49,9 +49,9 @@ const Dalle = () => {
     <>
     <div className='log-buttons'>
     {!isAuthenticated ? (
-      <button onClick={() => loginWithRedirect()}>Iniciar Sesión</button>
+      <button onClick={() => loginWithRedirect()}>Log in </button>
     ) : (
-      <button onClick={() => logout()}>Cerrar Sesión</button>
+      <button onClick={() => logout()}>Log out</button>
     )}
   </div>
     {isAuthenticated &&(<div className='container-dalle'>
