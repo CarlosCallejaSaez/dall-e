@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import "./Dalle.css";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Dalle = () => {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const API_TOKEN = import.meta.env.VITE_OPENAI_API_KEY;
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +46,15 @@ const Dalle = () => {
   };
 
   return (
-    <div className='container-dalle'>
+    <>
+    <div className='log-buttons'>
+    {!isAuthenticated ? (
+      <button onClick={() => loginWithRedirect()}>Iniciar Sesión</button>
+    ) : (
+      <button onClick={() => logout()}>Cerrar Sesión</button>
+    )}
+  </div>
+    {isAuthenticated &&(<div className='container-dalle'>
       <form className="generate-form mt-2" onSubmit={handleSubmit}>
         <textarea
           name="input"
@@ -77,7 +87,8 @@ const Dalle = () => {
          
         </div>
       )}
-    </div>
+    </div>)}
+    </>
   );
 };
 
