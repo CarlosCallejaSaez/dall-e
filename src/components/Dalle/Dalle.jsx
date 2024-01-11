@@ -10,6 +10,7 @@ const Dalle = () => {
   const [output, setOutput] = useState(null);
   const [prompt, setPrompt] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [alternativeLogin, setAlternativeLogin]=useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,12 +50,22 @@ const Dalle = () => {
     <>
     <div className='log-buttons'>
     {!isAuthenticated ? (
+      <>
       <button onClick={() => loginWithRedirect()}>Log in </button>
+      <p style={{ textAlign: 'center', marginTop: '50px' }}>
+      for this demo version, if you don't want to log in, you can click the next button to view the app
+    </p>
+
+<div style={{ textAlign: 'center', marginTop: '50px' }} >
+      <button style={{ width: '100px', height:'75px', backgroundColor:"aquamarine" }}  onClick={()=>setAlternativeLogin(true)}>Alternative Login</button>
+      </div>
+      </>
+
     ) : (
       <button onClick={() => logout()}>Log out</button>
     )}
   </div>
-    {isAuthenticated &&(<div className='container-dalle'>
+    {(isAuthenticated || alternativeLogin) &&(<div className='container-dalle'>
       <form className="generate-form mt-2" onSubmit={handleSubmit}>
         <textarea
           name="input"
